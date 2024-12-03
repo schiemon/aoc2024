@@ -34,13 +34,13 @@ func solvePuzzle2(input []string) (string, error) {
 		dontEnds = append(dontEnds, pos[1]) // Get the ending index of `don't()`
 	}
 
-	// Use two-pointer technique to match `do()` with `don't()`
-	var matches [][]int
+	// Use two-pointer technique to rangeActivatedMemory `do()` with `don't()`
+	var rangesActivatedMemory [][]int
 	doIdx, dontIdx := 0, 0
 
 	for doIdx < len(doStarts) && dontIdx < len(dontEnds) {
 		if doStarts[doIdx] < dontEnds[dontIdx] {
-			matches = append(matches, []int{doStarts[doIdx], dontEnds[dontIdx]})
+			rangesActivatedMemory = append(rangesActivatedMemory, []int{doStarts[doIdx], dontEnds[dontIdx]})
 
 			for doIdx < len(doStarts) && doStarts[doIdx] < dontEnds[dontIdx] {
 				// Move the `do()` pointer forward to see when the memory is activated again
@@ -55,8 +55,8 @@ func solvePuzzle2(input []string) (string, error) {
 	}
 
 	totalResult := int64(0)
-	for _, match := range matches {
-		substr := memory[match[0]:match[1]]
+	for _, rangeActivatedMemory := range rangesActivatedMemory {
+		substr := memory[rangeActivatedMemory[0]:rangeActivatedMemory[1]]
 
 		// Parse the substring
 		result, err := SolvePuzzle1OneLine(substr)
