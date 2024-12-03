@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"github.com/schiemon/aoc2024/day1"
+	"github.com/schiemon/aoc2024/day2"
+	"github.com/schiemon/aoc2024/day3"
 )
 
 func getSolver(day int, puzzle int) (func([]string) (string, error), error) {
@@ -11,6 +13,10 @@ func getSolver(day int, puzzle int) (func([]string) (string, error), error) {
 	switch day {
 	case 1:
 		solverForDay = day1.Solve
+	case 2:
+		solverForDay = day2.Solve
+	case 3:
+		solverForDay = day3.Solve
 	default:
 		return nil, fmt.Errorf("invalid day")
 	}
