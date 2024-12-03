@@ -23,27 +23,26 @@ func solvePuzzle2(input []string) (string, error) {
 	dontPositions := reDont.FindAllStringIndex(memory, -1)
 
 	// Extract only the start indices for `do()` and end indices for `don't()`
-	var starts []int
-	var ends []int
+	var doStarts []int
+	var dontEnds []int
 
 	for _, pos := range doPositions {
-		starts = append(starts, pos[0]) // Get the starting index of `do()`
+		doStarts = append(doStarts, pos[0]) // Get the starting index of `do()`
 	}
 
 	for _, pos := range dontPositions {
-		ends = append(ends, pos[1]) // Get the ending index of `don't()`
+		dontEnds = append(dontEnds, pos[1]) // Get the ending index of `don't()`
 	}
 
 	// Use two-pointer technique to match `do()` with `don't()`
 	var matches [][]int
 	doIdx, dontIdx := 0, 0
 
-	for doIdx < len(starts) && dontIdx < len(ends) {
-		if starts[doIdx] < ends[dontIdx] {
-			// A valid match
-			matches = append(matches, []int{starts[doIdx], ends[dontIdx]})
+	for doIdx < len(doStarts) && dontIdx < len(dontEnds) {
+		if doStarts[doIdx] < dontEnds[dontIdx] {
+			matches = append(matches, []int{doStarts[doIdx], dontEnds[dontIdx]})
 
-			for doIdx < len(starts) && starts[doIdx] < ends[dontIdx] {
+			for doIdx < len(doStarts) && doStarts[doIdx] < dontEnds[dontIdx] {
 				// Move the `do()` pointer forward to see when the memory is activated again
 				doIdx++
 			}
