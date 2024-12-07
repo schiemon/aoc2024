@@ -5,6 +5,7 @@ import (
 	"github.com/schiemon/aoc2024/day1"
 	"github.com/schiemon/aoc2024/day2"
 	"github.com/schiemon/aoc2024/day3"
+	"github.com/schiemon/aoc2024/day4"
 )
 
 func getSolver(day int, puzzle int) (func([]string) (string, error), error) {
@@ -17,6 +18,8 @@ func getSolver(day int, puzzle int) (func([]string) (string, error), error) {
 		solverForDay = day2.Solve
 	case 3:
 		solverForDay = day3.Solve
+	case 4:
+		solverForDay = day4.Solve
 	default:
 		return nil, fmt.Errorf("invalid day")
 	}
@@ -29,16 +32,16 @@ func getSolver(day int, puzzle int) (func([]string) (string, error), error) {
 }
 
 func run(config *Config) (string, error) {
-	solver, err := getSolver(config.Day(), config.Puzzle())
-
-	if err != nil {
-		return "", fmt.Errorf("error occurred while getting solver: %v", err)
-	}
-
 	rawInput, err := ReadInputFile(config.PathToInputFile())
 
 	if err != nil {
 		return "", fmt.Errorf("error occurred while reading input file: %v", err)
+	}
+
+	solver, err := getSolver(config.Day(), config.Puzzle())
+
+	if err != nil {
+		return "", fmt.Errorf("error occurred while getting solver: %v", err)
 	}
 
 	output, err := solver(rawInput)

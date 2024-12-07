@@ -52,3 +52,11 @@ func TestRunDay3Puzzle1(t *testing.T) {
 func TestRunDay3Puzzle2(t *testing.T) {
 	runAndTestPuzzle(3, 2, "97529391", t)
 }
+
+func TestRunDay4Puzzle1(t *testing.T) {
+	runAndTestPuzzle(4, 1, "2462", t)
+}
+
+func TestRunDay4Puzzle2(t *testing.T) {
+	runAndTestPuzzle(4, 2, "1877", t)
+}
